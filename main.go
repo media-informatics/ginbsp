@@ -28,7 +28,7 @@ var ctx context.Context
 
 func main() {
 	ctx = context.Background()
-	opt := options.Client().ApplyURI("mongodb://localhost:27017")
+	opt := options.Client().ApplyURI("mongodb://root:rootpassword@localhost:27018")
 	client, err := mongo.Connect(ctx, opt)
 	if err != nil {
 		log.Fatal(err)
@@ -126,7 +126,12 @@ func updateAlbum(c *gin.Context) {
 		return
 	}
 	upd := bson.D{
-		{"$set", bson.M{"album": updated.Title, "artist": updated.Artist, "year": updated.Year}},
+		{"$set", bson.M{
+			"album":  updated.Title,
+			"artist": updated.Artist,
+			"year":   updated.Year,
+		},
+		},
 	}
 
 	log.Printf("%v", updated)
