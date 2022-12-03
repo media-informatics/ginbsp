@@ -1,29 +1,31 @@
 version: '3'
 
 services:
-    mdb:
+    gomdb:
       image: mongo:latest
       container_name: gomdb
-      restart: always
+      # restart: always
       environment:
         MONGO_INITDB_ROOT_USERNAME: root
         MONGO_INITDB_ROOT_PASSWORD: rootpassword
 
       ports:
-        - "27018:27017"
+        - "27017:27017"
       volumes:
         - mdbdata:/data/db
-    #goapp:
-     # image: gowebapp:latest
-      #container_name: localapp
+    goapp:
+      image: gowebapp:latest
+      container_name: localapp
+      depends_on:
+        - "gomdb"
       #restart: always
-      #links:
-      #  - gomdb
-      #build:
-      #  context: .
-      #  dockerfile: Dockerfile.goapp
+      links:
+        - "gomdb"
+      build:
+        context: .
+        dockerfile: "Dockerfile.goapp"
 
-      #ports:
-      #  - "8080:8080"
+      ports:
+        - "8080:8080"
 volumes:
     mdbdata:

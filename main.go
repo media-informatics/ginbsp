@@ -28,7 +28,7 @@ var ctx context.Context
 
 func main() {
 	ctx = context.Background()
-	opt := options.Client().ApplyURI("mongodb://root:rootpassword@localhost:27018")
+	opt := options.Client().ApplyURI("mongodb://root:rootpassword@gomdb:27017")
 	client, err := mongo.Connect(ctx, opt)
 	if err != nil {
 		log.Fatal(err)
@@ -48,7 +48,7 @@ func main() {
 	router.GET("/albums/:title", getAlbumByTitle)
 	router.PUT("/albums", updateAlbum)
 	router.DELETE("/albums/:title", deleteAlbumByTitle)
-	router.Run("localhost:8080")
+	router.Run("0.0.0.0:8080")
 }
 
 func albumInit(ctx context.Context, coll *mongo.Collection) (Albums, error) {

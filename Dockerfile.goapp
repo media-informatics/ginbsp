@@ -2,9 +2,9 @@ FROM golang:latest AS build
 
 WORKDIR /ginbsp
 COPY ./main.go .
-COPY ./go.sum .
-COPY ./go.mod .
 RUN mkdir -p vendor
+COPY go.mod .
+COPY go.sum .
 RUN go mod vendor
 RUN go build -o MyApp main.go
 
