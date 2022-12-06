@@ -48,7 +48,7 @@ func main() {
 	router.GET("/albums/:title", getAlbumByTitle)
 	router.PUT("/albums", updateAlbum)
 	router.DELETE("/albums/:title", deleteAlbumByTitle)
-	router.Run("0.0.0.0:8080")
+	router.Run(":8080")
 }
 
 func albumInit(ctx context.Context, coll *mongo.Collection) (Albums, error) {
