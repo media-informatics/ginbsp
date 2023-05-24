@@ -1,1 +1,1 @@
-# ginbsp
+# ginbsp Beispiel für GIN
